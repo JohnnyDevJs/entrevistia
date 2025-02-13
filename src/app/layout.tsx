@@ -1,13 +1,14 @@
 import '@/app/assets/styles/globals.css'
 
-import type { Metadata } from 'next'
-import { Open_Sans } from 'next/font/google'
-
-import { APP_NAME, APP_DESCRIPTION, SERVER_URL} from '@/lib/constants'
-import { Providers } from './providers'
 import { cn } from '@heroui/react'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 
-const openSans = Open_Sans({
+import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from '@/lib/constants'
+
+import { Providers } from './providers'
+
+const inter = Inter({
   subsets: ['latin'],
 })
 
@@ -27,9 +28,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR" suppressHydrationWarning>
-      <body className={cn(openSans.className, "antialiased")}>
+      <body className={cn(inter.className, 'antialiased')}>
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
-          {children}
+          <div className="relative flex flex-col h-screen">
+            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+              {children}
+            </main>
+          </div>
         </Providers>
       </body>
     </html>

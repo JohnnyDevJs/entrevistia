@@ -11,8 +11,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        pink: {
+          500: '#FF1CF7',
+        },
+        violet: {
+          500: '#b249f8',
+        },
       },
     },
   },

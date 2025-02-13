@@ -1,11 +1,11 @@
-import { Button } from '@heroui/react'
-
 import { Metadata } from 'next'
 
+import { Home } from '@/components/Home'
+
 export const metadata: Metadata = {
-  title: 'Home aqui',
+  title: 'Home',
 }
 
 export default function HomePage() {
-  return <Button>Teste</Button>
+  return <Home />
 }
