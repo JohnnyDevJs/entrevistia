@@ -40,7 +40,7 @@ const featuresCategories = [
 
 export function InterviewProcessCards() {
   return (
-    <div className="my-10">
+    <section className="my-10">
       <div className="text-center">
         <span className="tracking-tight inline font-semibold bg-clip-text text-transparent bg-gradient-to-b from-pink-500 to-violet-500 text-[2.3rem] lg:text-5xl leading-9">
           Processo Confiável
@@ -56,6 +56,6 @@ export function InterviewProcessCards() {
           />
         ))}
       </div>
-    </div>
+    </section>
   )
 }

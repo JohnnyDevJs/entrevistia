@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
 import { Footer } from '@/components/layout/footer'
+import { HeaderAnnouncement } from '@/components/layout/header/header-announcement'
 import { Navbar } from '@/components/layout/header/navbar'
 import { APP_DESCRIPTION, APP_NAME } from '@/constants'
 
@@ -31,6 +32,7 @@ export default function RootLayout({
     <html lang="pt-BR" suppressHydrationWarning>
       <body className={cn(inter.className, 'antialiased')}>
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
+          <HeaderAnnouncement />
           <div className="relative flex flex-col h-screen">
             <Navbar />
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">

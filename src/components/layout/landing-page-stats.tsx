@@ -73,14 +73,13 @@ const data: CircleChartProps[] = [
 
 export function LandingPageStats() {
   return (
-    <>
-      <hr className="my-10" />
+    <section className="w-full mt-10">
       <dl className="grid w-full grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-4">
         {data.map((item, index) => (
           <CircleChartCard key={index} {...item} />
         ))}
       </dl>
-    </>
+    </section>
   )
 }
 

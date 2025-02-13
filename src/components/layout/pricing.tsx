@@ -25,7 +25,7 @@ export function Pricing() {
   ]
 
   return (
-    <div id="pricing">
+    <section>
       <div className="text-center my-10">
         <span className="tracking-tight inline font-semibold bg-clip-text text-transparent bg-gradient-to-b from-pink-500 to-violet-500 text-[2.3rem] lg:text-5xl leading-9">
           Planos
@@ -74,6 +74,6 @@ export function Pricing() {
           </Button>
         </CardFooter>
       </Card>
-    </div>
+    </section>
   )
 }

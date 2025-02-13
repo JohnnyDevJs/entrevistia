@@ -26,7 +26,7 @@ export function NavbarUser() {
         </DropdownTrigger>
         <DropdownMenu aria-label="User Actions" variant="flat">
           <DropdownItem key="profile" className="h-14 gap-2">
-            <p className="font-bold">Signed in as</p>
+            <p className="font-bold">Conectado como</p>
             <p className="font-bold">john.doe@example.com</p>
           </DropdownItem>
           <DropdownItem
@@ -34,21 +34,21 @@ export function NavbarUser() {
             href="/admin/dashboard"
             startContent={<Icon icon="tabler:user-cog" />}
           >
-            Admin Dashboard
+            Painel Admin
           </DropdownItem>
           <DropdownItem
             key="app_dashboard"
             href="/app/dashboard"
             startContent={<Icon icon="hugeicons:ai-brain-04" />}
           >
-            App Dashboard
+            Painel do App
           </DropdownItem>
           <DropdownItem
             key="logout"
             color="danger"
             startContent={<Icon icon="tabler:logout-2" />}
           >
-            Logout
+            Sair
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
