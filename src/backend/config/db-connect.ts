@@ -1,10 +1,12 @@
 /* eslint-disable no-var */
 import mongoose from 'mongoose'
 
-import { env } from '@/env'
+// import { env } from '@/env'
 
 const MONGODB_URI =
-  env.NODE_ENV === 'development' ? env.MONGODB_URI_LOCAL! : env.MONGODB_URI!
+  process.env.NODE_ENV === 'development'
+    ? process.env.MONGODB_URI_LOCAL!
+    : process.env.MONGODB_URI!
 
 if (!MONGODB_URI) {
   throw new Error('MONGODB_URI is not defined')

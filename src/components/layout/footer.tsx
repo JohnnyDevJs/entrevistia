@@ -7,7 +7,7 @@ import { APP_NAME } from '@/constants'
 
 export function Footer() {
   return (
-    <footer className="w-full flex items-center justify-center bg-muted mt-20 md:py-8 lg:py-10">
+    <footer className="w-full flex items-center justify-center bg-muted md:py-8 lg:py-10">
       <div className="container flex flex-col items-center justify-center gap-4 md:flex-row">
         <Link href="#" className="flex items-center gap-2" prefetch={false}>
           <Logo />
