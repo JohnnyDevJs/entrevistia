@@ -4,7 +4,9 @@ import { cn } from '@heroui/react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
-import { APP_DESCRIPTION, APP_NAME, SERVER_URL } from '@/lib/constants'
+import { Footer } from '@/components/layout/footer'
+import { Navbar } from '@/components/layout/header/navbar'
+import { APP_DESCRIPTION, APP_NAME } from '@/constants'
 
 import { Providers } from './providers'
 
@@ -18,7 +20,6 @@ export const metadata: Metadata = {
     default: APP_NAME,
   },
   description: `${APP_DESCRIPTION}`,
-  metadataBase: new URL(SERVER_URL),
 }
 
 export default function RootLayout({
@@ -31,9 +32,11 @@ export default function RootLayout({
       <body className={cn(inter.className, 'antialiased')}>
         <Providers themeProps={{ attribute: 'class', defaultTheme: 'light' }}>
           <div className="relative flex flex-col h-screen">
+            <Navbar />
             <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
               {children}
             </main>
+            <Footer />
           </div>
         </Providers>
       </body>

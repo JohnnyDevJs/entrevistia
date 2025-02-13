@@ -30,7 +30,7 @@ export function Home() {
         </span>
         <br />
         <span className="tracking-tight inline font-semibold text-[2.3rem] lg:text-5xl leading-9">
-          para uma Entrevista de Sucesso
+          para uma Entrevista de Sucesso!
         </span>
         <div className="w-full  my-2 text-lg lg:text-xl text-default-600 block mt-4">
           Preparação para entrevistas com IA de forma simples e eficaz. Rápida,

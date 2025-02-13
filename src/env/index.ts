@@ -1,8 +1,6 @@
 import { z } from 'zod'
 
 const envSchema = z.object({
-  NEXT_PUBLIC_APP_NAME: z.string(),
-  NEXT_PUBLIC_APP_DESCRIPTION: z.string(),
   NEXT_PUBLIC_SERVER_URL: z.string().url(),
   NEXTAUTH_SECRET: z.string(),
   NEXTAUTH_URL: z.string().url(),
