@@ -1,10 +1,9 @@
 import { z } from 'zod'
 
 const envSchema = z.object({
-  NEXT_PUBLIC_SERVER_URL: z.string().url(),
-  NEXTAUTH_SECRET: z.string(),
-  NEXTAUTH_URL: z.string().url(),
-  NEXTAUTH_URL_INTERNAL: z.string().url(),
+  MONGODB_URI_LOCAL: z.string().url(),
+  MONGODB_URI: z.string().url(),
+  NODE_ENV: z.enum(['development', 'production']).default('development'),
 })
 
 const _env = envSchema.safeParse(process.env)
