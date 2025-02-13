@@ -3,7 +3,10 @@
 import { Button, Link } from '@heroui/react'
 import { Icon } from '@iconify/react'
 
-import { LandingPageStats } from './layout/landing-page/landing-page-stats'
+import { InterviewProcessCards } from './layout/interview-process-cards'
+import { LandingPageStats } from './layout/landing-page-stats'
+import { Pricing } from './layout/pricing'
+import { Testimonials } from './layout/testimonials'
 
 export function Home() {
   return (
@@ -61,6 +64,9 @@ export function Home() {
       </div>
 
       <LandingPageStats />
+      <Testimonials />
+      <Pricing />
+      <InterviewProcessCards />
     </section>
   )
 }
