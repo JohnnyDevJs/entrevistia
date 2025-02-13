@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs'
 import mongoose, { Document } from 'mongoose'
 
 import { userRoles } from '@/data/testimonials'
@@ -83,6 +84,17 @@ const userSchema = new mongoose.Schema<IUser>(
     timestamps: true,
   },
 )
+
+// Encrypt password before saving user
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) {
+    next()
+  }
+  if (this.password) {
+    this.password = await bcrypt.hash(this.password, 10)
+  }
+  next()
+})
 
 const User = mongoose.models.User || mongoose.model<IUser>('User', userSchema)
 
