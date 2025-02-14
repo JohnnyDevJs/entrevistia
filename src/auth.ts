@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { NextAuthOptions } from 'next-auth'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
@@ -6,13 +7,29 @@ import { dbConnect } from '@/backend/config/db-connect'
 import { User } from '@/backend/models/user.model'
 import { env } from '@/env'
 
-export const options = {
+export const authOptions = {
   pages: {
     signIn: '/login',
   },
   session: {
     strategy: 'jwt',
     maxAge: 24 * 60 * 60,
+  },
+  callbacks: {
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.user = user.user
+      }
+
+      console.log('User', user)
+      return token
+    },
+    async session({ session, token }: any) {
+      session.user = token.user
+
+      console.log('token', token)
+      return session
+    },
   },
   providers: [
     CredentialsProvider({
@@ -24,7 +41,9 @@ export const options = {
       async authorize(credentials) {
         await dbConnect()
 
-        const user = await User.findOne({ email: credentials?.email })
+        const user = await User.findOne({ email: credentials?.email }).select(
+          '+password',
+        )
 
         if (!user) {
           throw new Error('E-mail ou senha inválidos')
@@ -42,8 +61,7 @@ export const options = {
       },
     }),
   ],
-
   secret: env.NEXTAUTH_SECRET,
 } satisfies NextAuthOptions
 
-export const { handlers, auth, signIn, signOut } = NextAuth(options)
+export const handler = NextAuth(authOptions)
