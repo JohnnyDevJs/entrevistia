@@ -1,4 +1,4 @@
-import '@/app/assets/styles/globals.css'
+import '@/assets/styles/globals.css'
 
 import { cn } from '@heroui/react'
 import type { Metadata } from 'next'

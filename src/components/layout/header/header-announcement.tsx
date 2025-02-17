@@ -8,8 +8,7 @@ export function HeaderAnnouncement() {
     <div className="flex w-full items-center justify-center gap-x-3 border-b-1 border-divider bg-background/[0.15] px-6 py-2 backdrop-blur-xl sm:px-3.5">
       <p className="text-small text-foreground">
         <Link className="text-inherit text-sm" href="#">
-          Prepare-se de forma mais inteligente, tenha sucesso mais rápido – sua
-          jornada de entrevistas começa aqui!&nbsp;
+          Prepare-se melhor e tenha sucesso mais rápido!&nbsp;
         </Link>
       </p>
       <Button

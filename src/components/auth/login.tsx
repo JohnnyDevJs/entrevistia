@@ -61,9 +61,9 @@ export function Login() {
       <div className="flex w-full max-w-sm flex-col gap-4 rounded-large">
         <div className="flex flex-col items-center pb-6">
           <Logo />
-          <p className="text-xl font-medium">Welcome Back</p>
+          <p className="text-xl font-medium">Bem-vindo de volta</p>
           <p className="text-small text-default-500">
-            Log in to your account to continue
+            Faça login para continuar
           </p>
         </div>
         <Form
@@ -123,7 +123,7 @@ export function Login() {
         </Form>
         <div className="flex items-center gap-4 py-2">
           <Divider className="flex-1" />
-          <p className="shrink-0 text-tiny text-default-500">OR</p>
+          <p className="shrink-0 text-tiny text-default-500">OU</p>
           <Divider className="flex-1" />
         </div>
         <div className="flex flex-col gap-2">

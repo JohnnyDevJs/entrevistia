@@ -8,7 +8,14 @@ import { User } from '@heroui/react'
 import { Icon } from '@iconify/react'
 import React from 'react'
 
-export function NavbarUser() {
+import { IUser } from '@/backend/models/user.model'
+import { extractFirstAndLastName } from '@/lib/utils'
+
+type NavbarUserProps = {
+  user: IUser
+}
+
+export function NavbarUser({ user }: NavbarUserProps) {
   return (
     <div className="flex items-center gap-4">
       <Dropdown placement="bottom-start">
@@ -17,17 +24,17 @@ export function NavbarUser() {
             as="button"
             avatarProps={{
               isBordered: true,
-              src: '/images/default_user.png',
+              src: user.profilePicture.url ?? '/images/default-user.png',
             }}
             className="transition-transform"
-            description="john.doe@example.com"
-            name="John Doe"
+            description={user.email}
+            name={extractFirstAndLastName(user.name)}
           />
         </DropdownTrigger>
         <DropdownMenu aria-label="User Actions" variant="flat">
           <DropdownItem key="profile" className="h-14 gap-2">
             <p className="font-bold">Conectado como</p>
-            <p className="font-bold">john.doe@example.com</p>
+            <p className="font-bold">{user.email}</p>
           </DropdownItem>
           <DropdownItem
             key="admin_dashboard"

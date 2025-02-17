@@ -8,29 +8,6 @@ import { User } from '@/backend/models/user.model'
 import { env } from '@/env'
 
 export const authOptions = {
-  pages: {
-    signIn: '/login',
-  },
-  session: {
-    strategy: 'jwt',
-    maxAge: 24 * 60 * 60,
-  },
-  callbacks: {
-    async jwt({ token, user }: any) {
-      if (user) {
-        token.user = user.user
-      }
-
-      console.log('User', user)
-      return token
-    },
-    async session({ session, token }: any) {
-      session.user = token.user
-
-      console.log('token', token)
-      return session
-    },
-  },
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -61,6 +38,30 @@ export const authOptions = {
       },
     }),
   ],
+  session: {
+    strategy: 'jwt',
+    maxAge: 24 * 60 * 60,
+  },
+  callbacks: {
+    async jwt({ token, user }: any) {
+      if (user) {
+        token.user = user
+      }
+
+      console.log('User', user)
+      return token
+    },
+    async session({ session, token }: any) {
+      session.user = token.user
+
+      console.log('token', token)
+      return session
+    },
+  },
+  pages: {
+    signIn: '/login',
+  },
+
   secret: env.NEXTAUTH_SECRET,
 } satisfies NextAuthOptions
 
