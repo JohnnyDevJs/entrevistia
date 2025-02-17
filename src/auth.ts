@@ -43,6 +43,37 @@ export const authOptions = {
     maxAge: 24 * 60 * 60,
   },
   callbacks: {
+    async signIn({ user, account, profile }) {
+      await dbConnect()
+
+      if (account?.provider === 'credentials') {
+        user.id = user?._id
+      } else {
+        const existingUser = await User.findOne({ email: profile?.email })
+
+        if (!existingUser) {
+          const newUser = await User.create({
+            email: profile?.email,
+            name: profile?.name,
+            profilePicture: profile?.image || user?.image,
+            accountProvider: [
+              {
+                provider: account?.provider,
+                providerId: account?.id || profile?.sub,
+              },
+            ],
+          })
+
+          await newUser.save()
+
+          user.id = newUser._id
+        } else {
+          user.id = existingUser._id
+        }
+      }
+
+      return true
+    },
     async jwt({ token, user }: any) {
       if (user) {
         token.user = user
