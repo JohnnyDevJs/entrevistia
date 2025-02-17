@@ -6,6 +6,7 @@ import {
 } from '@heroui/react'
 import { User } from '@heroui/react'
 import { Icon } from '@iconify/react'
+import { signOut } from 'next-auth/react'
 import React from 'react'
 
 import { IUser } from '@/backend/models/user.model'
@@ -54,6 +55,7 @@ export function NavbarUser({ user }: NavbarUserProps) {
             key="logout"
             color="danger"
             startContent={<Icon icon="tabler:logout-2" />}
+            onPress={() => signOut()}
           >
             Sair
           </DropdownItem>

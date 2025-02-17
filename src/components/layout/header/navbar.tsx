@@ -15,7 +15,7 @@ import {
 } from '@heroui/react'
 import { Icon } from '@iconify/react'
 import NextLink from 'next/link'
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { useState } from 'react'
 
 import { IUser } from '@/backend/models/user.model'
@@ -140,7 +140,13 @@ export function Navbar() {
         </NavbarMenuItem>
 
         <NavbarMenuItem>
-          <Link color={'danger'} as={Link} size="lg" className="flex gap-1">
+          <Link
+            color={'danger'}
+            as={Link}
+            size="lg"
+            className="flex gap-1"
+            onPress={() => signOut()}
+          >
             <Icon icon="tabler:logout-2" /> Logout
           </Link>
         </NavbarMenuItem>
