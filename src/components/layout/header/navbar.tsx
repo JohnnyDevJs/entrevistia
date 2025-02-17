@@ -11,12 +11,12 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-  Skeleton,
   User,
 } from '@heroui/react'
 import { Icon } from '@iconify/react'
 import NextLink from 'next/link'
 import { useSession } from 'next-auth/react'
+import { useState } from 'react'
 
 import { IUser } from '@/backend/models/user.model'
 import { Logo } from '@/components/logo'
@@ -26,12 +26,18 @@ import { extractFirstAndLastName } from '@/lib/utils'
 import { NavbarUser } from './navbar-user'
 
 export function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const { data } = useSession()
 
   const user = data?.user as IUser
 
   return (
-    <NextUINavbar maxWidth="xl" position="sticky">
+    <NextUINavbar
+      maxWidth="xl"
+      position="sticky"
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink className="flex justify-start items-center gap-1" href="/">
@@ -66,29 +72,36 @@ export function Navbar() {
             </NavbarItem>
           </>
         ) : (
-          <>
-            {data === undefined && (
-              <Skeleton className="flex rounded-full w-[99px] h-10" />
-            )}
-            {data === null && (
-              <Button
-                className="bg-foreground font-medium text-background px-5"
-                color="secondary"
-                endContent={<Icon icon="solar:alt-arrow-right-linear" />}
-                radius="full"
-                variant="flat"
-                as={Link}
-                href="/login"
-              >
-                Login
-              </Button>
-            )}
-          </>
+          <Button
+            className="bg-foreground font-medium text-background px-5"
+            color="secondary"
+            endContent={<Icon icon="solar:alt-arrow-right-linear" />}
+            radius="full"
+            variant="flat"
+            as={Link}
+            href="/login"
+          >
+            Login
+          </Button>
         )}
       </NavbarContent>
 
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <NavbarMenuToggle aria-label="Open menu" />
+        {data?.user ? (
+          <NavbarMenuToggle aria-label="Open menu" />
+        ) : (
+          <Button
+            className="bg-foreground font-medium text-background px-5"
+            color="secondary"
+            endContent={<Icon icon="solar:alt-arrow-right-linear" />}
+            radius="full"
+            variant="flat"
+            as={Link}
+            href="/login"
+          >
+            Login
+          </Button>
+        )}
       </NavbarContent>
 
       <NavbarMenu className="pt-16">
@@ -108,6 +121,7 @@ export function Navbar() {
             href="/admin/dashboard"
             size="lg"
             className="flex gap-1"
+            onPress={() => setIsMenuOpen(false)}
           >
             <Icon icon="tabler:user-cog" /> Admin Dashboard
           </Link>
@@ -119,6 +133,7 @@ export function Navbar() {
             href="/app/dashboard"
             size="lg"
             className="flex gap-1"
+            onPress={() => setIsMenuOpen(false)}
           >
             <Icon icon="hugeicons:ai-brain-04" /> App Dashboard
           </Link>
