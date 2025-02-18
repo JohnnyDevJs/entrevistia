@@ -3,6 +3,7 @@ import type { NextAuthOptions } from 'next-auth'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GithubProvider from 'next-auth/providers/github'
+import GoogleProvider from 'next-auth/providers/google'
 
 import { dbConnect } from '@/backend/config/db-connect'
 import { User } from '@/backend/models/user.model'
@@ -42,6 +43,10 @@ export const authOptions = {
       clientId: env.GITHUB_CLIENT_ID!,
       clientSecret: env.GITHUB_CLIENT_SECRET!,
     }),
+    GoogleProvider({
+      clientId: env.GOOGLE_CLIENT_ID!,
+      clientSecret: env.GOOGLE_CLIENT_SECRET!,
+    }),
   ],
   session: {
     strategy: 'jwt',
@@ -57,6 +62,8 @@ export const authOptions = {
         user.id = user?._id
       } else {
         const existingUser = await User.findOne({ email: user?.email })
+
+        console.log('profile', existingUser)
 
         if (!existingUser) {
           const newUser = new User({
