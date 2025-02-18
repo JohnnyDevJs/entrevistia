@@ -109,7 +109,7 @@ export function Navbar() {
           as="button"
           avatarProps={{
             isBordered: true,
-            src: user?.profilePicture.url ?? '/images/default-user.png',
+            src: user?.profilePicture?.url ?? '/images/default-user.png',
           }}
           className="transition-transform mb-5"
           description={user?.email}

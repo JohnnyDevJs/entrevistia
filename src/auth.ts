@@ -2,6 +2,7 @@
 import type { NextAuthOptions } from 'next-auth'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import GithubProvider from 'next-auth/providers/github'
 
 import { dbConnect } from '@/backend/config/db-connect'
 import { User } from '@/backend/models/user.model'
@@ -37,6 +38,10 @@ export const authOptions = {
         return user
       },
     }),
+    GithubProvider({
+      clientId: env.GITHUB_CLIENT_ID!,
+      clientSecret: env.GITHUB_CLIENT_SECRET!,
+    }),
   ],
   session: {
     strategy: 'jwt',
@@ -46,20 +51,22 @@ export const authOptions = {
     async signIn({ user, account, profile }) {
       await dbConnect()
 
+      console.log('account', account?.providerAccountId)
+
       if (account?.provider === 'credentials') {
         user.id = user?._id
       } else {
-        const existingUser = await User.findOne({ email: profile?.email })
+        const existingUser = await User.findOne({ email: user?.email })
 
         if (!existingUser) {
-          const newUser = await User.create({
-            email: profile?.email,
-            name: profile?.name,
-            profilePicture: profile?.image || user?.image,
-            accountProvider: [
+          const newUser = new User({
+            email: user?.email,
+            name: user?.name,
+            profilePicture: { url: profile?.image || user?.image },
+            authProviders: [
               {
                 provider: account?.provider,
-                providerId: account?.id || profile?.sub,
+                providerId: account?.providerAccountId || profile?.sub,
               },
             ],
           })
@@ -77,15 +84,21 @@ export const authOptions = {
     async jwt({ token, user }: any) {
       if (user) {
         token.user = user
+      } else {
+        await dbConnect()
+
+        const dbUser = await User.findById(token.user.id)
+
+        if (dbUser) token.user = dbUser
       }
 
-      console.log('User', user)
       return token
     },
     async session({ session, token }: any) {
       session.user = token.user
 
-      console.log('token', token)
+      delete session.user.password
+
       return session
     },
   },

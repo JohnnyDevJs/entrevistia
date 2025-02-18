@@ -7,6 +7,8 @@ const envSchema = z.object({
   NODE_ENV: z.enum(['development', 'production']).default('development'),
   NEXTAUTH_URL: z.string().url(),
   NEXTAUTH_SECRET: z.string(),
+  GITHUB_CLIENT_ID: z.string(),
+  GITHUB_CLIENT_SECRET: z.string(),
 })
 
 const _env = envSchema.safeParse(process.env)

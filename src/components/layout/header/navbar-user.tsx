@@ -25,7 +25,7 @@ export function NavbarUser({ user }: NavbarUserProps) {
             as="button"
             avatarProps={{
               isBordered: true,
-              src: user.profilePicture.url ?? '/images/default-user.png',
+              src: user.profilePicture?.url ?? '/images/default-user.png',
             }}
             className="transition-transform"
             description={user.email}
